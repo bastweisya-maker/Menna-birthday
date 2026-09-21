@@ -1,0 +1,572 @@
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800&display=swap");
+
+:root {
+  color-scheme: dark;
+  --background: #060d24;
+  --ink: #f8f8ff;
+  --muted: #c5cee5;
+  --pink: #ffb7d8;
+  --pink-light: #302844;
+  --border: #b9cbff30;
+  --blue: #abc5ff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  min-height: 100svh;
+  position: relative;
+  isolation: isolate;
+  font-family: "Cairo", Tahoma, sans-serif;
+  color: var(--ink);
+  background: var(--background);
+}
+
+/* مشهد المملكة */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -2;
+  pointer-events: none;
+  background-image: url("assets/kingdom.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 72% center;
+}
+
+/* تغميق ناحية الكلام مع الحفاظ على وضوح القصر */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      90deg,
+      #060d24ee 0%,
+      #060d24c9 28%,
+      #060d2455 52%,
+      transparent 76%
+    );
+}
+
+#magicSky {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.header,
+main,
+footer,
+noscript {
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  padding: 26px 5vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  color: #f1efff;
+  font-size: 14px;
+  text-shadow: 0 2px 12px #00000080;
+}
+
+.pink {
+  color: var(--pink);
+}
+
+.date {
+  direction: ltr;
+  font-family: "Cairo", sans-serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 3px;
+}
+
+/* اللعبة شمال والقصر يمين */
+main {
+  width: min(620px, 45vw);
+  margin: 30px auto 0 5vw;
+  padding: 0 0 22px;
+}
+
+.overline {
+  margin: 0 0 18px;
+  color: var(--blue);
+  text-align: center;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+.progress {
+  height: 3px;
+  margin: 0 24px 23px;
+  border-radius: 10px;
+  background: #ffffff15;
+}
+
+#progressBar {
+  height: 100%;
+  width: 0;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #9abaff, #ffb4dc);
+  box-shadow: 0 0 15px #c6a8ff65;
+  transition: width 0.5s ease;
+}
+
+.card {
+  position: relative;
+  padding: 38px 32px;
+  border: 1px solid #b9cbff30;
+  border-radius: 24px;
+  color: var(--ink);
+  background: linear-gradient(145deg, #101c38df, #14203bcf);
+  box-shadow:
+    0 24px 70px #00000035,
+    inset 0 1px 0 #ffffff0c;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.card::before {
+  content: none;
+}
+
+.card.enter {
+  animation: revealPage 0.55s ease both;
+}
+
+.symbol {
+  font-family: Arial, sans-serif;
+  font-size: 59px;
+  line-height: 1.2;
+  margin-bottom: 22px;
+  color: var(--pink);
+  text-shadow: 0 0 35px #ffb7d838;
+}
+
+.label {
+  margin: 0 0 18px;
+  color: var(--blue);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.9;
+}
+
+h1,
+h2 {
+  margin: 0 0 20px;
+  font-family: "Cairo", Tahoma, sans-serif;
+  font-size: clamp(27px, 2.8vw, 42px);
+  font-weight: 800;
+  line-height: 1.65;
+  color: #fff6fc;
+  text-shadow: none;
+}
+
+p {
+  margin: 0 0 22px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 2;
+}
+
+.signature {
+  margin: 24px 0;
+  color: var(--pink);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 2;
+}
+
+button {
+  min-height: 48px;
+  font: inherit;
+  font-size: 16px;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:focus-visible,
+input:focus-visible,
+video:focus-visible,
+a:focus-visible {
+  outline: 3px solid #bbd2ff;
+  outline-offset: 5px;
+}
+
+.primary {
+  padding: 14px 27px;
+  border: 1px solid #ffffff40;
+  border-radius: 15px;
+  background: linear-gradient(110deg, #b2caff, #e0bdff 55%, #ffb9d5);
+  color: #19223e;
+  font-weight: 800;
+  box-shadow: 0 8px 25px #b49aff24;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 30px #b49aff40;
+}
+
+.primary:active {
+  transform: translateY(0);
+}
+
+.primary:disabled {
+  opacity: 0.4;
+  cursor: default;
+  transform: none;
+  box-shadow: none;
+}
+
+.options {
+  display: grid;
+  gap: 12px;
+  margin: 24px 0 12px;
+}
+
+.option,
+.word {
+  padding: 13px 17px;
+  border: 1px solid #abc5ff38;
+  border-radius: 13px;
+  background: #abc5ff08;
+  color: var(--ink);
+  line-height: 1.8;
+  transition: background 0.2s, border-color 0.2s;
+}
+
+.option:hover,
+.word:hover {
+  background: #abc5ff16;
+  border-color: #b4ccff85;
+}
+
+.option.wrong {
+  background: #ff9bc51a;
+  border-color: #ffb7d8;
+}
+
+.quiet {
+  display: block;
+  margin: 14px auto 0;
+  padding: 8px 10px;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font-size: 14px;
+  text-decoration: underline;
+  text-underline-offset: 5px;
+}
+
+.feedback {
+  min-height: 28px;
+  margin: 16px 0;
+  color: var(--pink);
+  font-size: 15px;
+  line-height: 1.9;
+}
+
+.words {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin: 23px 0;
+}
+
+.word:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
+
+.sentence {
+  min-height: 90px;
+  padding: 22px 14px;
+  border: 1px dashed #b5c9ff65;
+  border-radius: 14px;
+  background: #abc5ff08;
+  color: #e7d8ff;
+  font-size: 22px;
+  line-height: 1.9;
+}
+
+/* تخصيص الصور والألعاب مع تجاوز التنسيق القديم داخل JS */
+#stage .album {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  gap: 14px;
+  margin: 26px 0;
+}
+
+#stage .album figure {
+  min-width: 0;
+  margin: 0;
+  padding: 6px;
+  border: 1px solid #c5d6ff30;
+  border-radius: 13px;
+  background: #ffffff06;
+}
+
+#stage .album img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+#stage .album figcaption {
+  padding: 10px 3px 4px;
+  margin: 0;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+#stage .album-count {
+  margin: 20px 0;
+  color: var(--blue);
+  font-size: 14px;
+}
+
+#stage .match-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 24px 0;
+}
+
+#stage .match-card {
+  min-height: 72px;
+  padding: 8px;
+  border: 1px solid #abc5ff40;
+  border-radius: 14px;
+  background: linear-gradient(145deg, #253759, #202543);
+  color: #d5e3ff;
+  font-size: 28px;
+}
+
+#stage .match-card.open {
+  border-color: #e5c0ff;
+  background: #453e69;
+}
+
+#stage .match-card.matched {
+  border-color: #c0b5ff;
+  background: #524777;
+  color: #fff4ff;
+  opacity: 1;
+  box-shadow: 0 0 18px #c0b5ff15;
+}
+
+#stage .number-input {
+  display: block;
+  width: min(100%, 260px);
+  margin: 24px auto;
+  padding: 16px;
+  border: 1px solid #abc5ff65;
+  border-radius: 14px;
+  background: #ffffff07;
+  color: #f0e7ff;
+  font: inherit;
+  font-size: 28px;
+  letter-spacing: 7px;
+  text-align: center;
+  direction: ltr;
+}
+
+#stage .wrong-photo {
+  display: block;
+  width: min(100%, 260px);
+  height: auto;
+  margin: 20px auto;
+  border: 4px solid #ffb7d85c;
+  border-radius: 16px;
+}
+
+#stage .photo-error,
+.media-note {
+  padding: 18px;
+  border: 1px solid #abc5ff30;
+  border-radius: 12px;
+  background: #ffffff06;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.9;
+  overflow-wrap: anywhere;
+}
+
+video {
+  display: block;
+  width: 100%;
+  max-height: 480px;
+  margin: 25px 0;
+  border: 1px solid #abc5ff45;
+  border-radius: 15px;
+  background: #030713;
+}
+
+.bottom-note {
+  margin: 23px 0 0;
+  text-align: center;
+  color: #c4cce2;
+  font-size: 14px;
+  line-height: 1.9;
+}
+
+footer {
+  width: min(620px, 45vw);
+  margin: 0 auto 0 5vw;
+  padding: 12px 16px 85px;
+  color: #c4cce2;
+  font-size: 14px;
+  line-height: 1.9;
+  text-align: center;
+}
+
+#magicToggle {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 5;
+  min-height: 44px;
+  padding: 9px 14px;
+  border: 1px solid #abc5ff45;
+  border-radius: 30px;
+  background: #111c35ee;
+  color: #d9e5ff;
+  font-size: 13px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+@keyframes revealPage {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* التابلت والموبايل: القصر فوق، ثم اللعبة */
+@media (max-width: 900px) {
+  body::before {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 400px;
+    background-size: cover;
+    background-position: 82% center;
+  }
+
+  body::after {
+    position: absolute;
+    inset: 0 0 auto;
+    height: 405px;
+    background: linear-gradient(
+      to bottom,
+      #060d2430 0%,
+      transparent 45%,
+      #060d24 100%
+    );
+  }
+
+  .header {
+    padding: 22px;
+    font-size: 13px;
+  }
+
+  main {
+    width: min(620px, calc(100% - 28px));
+    margin: 185px auto 0;
+  }
+
+  footer {
+    width: min(620px, calc(100% - 28px));
+    margin: 0 auto;
+  }
+
+  .overline {
+    color: #e3eaff;
+    text-shadow: 0 2px 12px #000;
+  }
+
+  .card {
+    background: linear-gradient(145deg, #101c38f2, #14203bf0);
+  }
+
+  h1,
+  h2 {
+    font-size: clamp(28px, 5vw, 38px);
+  }
+}
+
+@media (max-width: 480px) {
+  .card {
+    padding: 30px 20px;
+    border-radius: 21px;
+  }
+
+  .header {
+    gap: 10px;
+    padding: 20px 18px;
+  }
+
+  .date {
+    font-size: 13px;
+    letter-spacing: 2px;
+  }
+
+  .symbol {
+    font-size: 52px;
+  }
+
+  #stage .album {
+    gap: 10px;
+  }
+
+  #stage .match-grid {
+    gap: 8px;
+  }
+
+  #stage .match-card {
+    min-height: 61px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+}
