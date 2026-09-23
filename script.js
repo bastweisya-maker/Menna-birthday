@@ -6,28 +6,28 @@
     // مثال: "assets/final.mp4"
     finalVideo: "",
 
-    wrongPhoto: "assets/wrong-answer.png.png",
+    wrongPhoto: "assets/wrong-answer.webp",
 
     photos: [
-      "assets/png.01.png",
-      "assets/boudy-2.png.png",
-      "assets/monmon-birthday.png.png",
-      "assets/png.4.png",
-      "assets/png.5.png",
-      "assets/png.6.png",
-      "assets/png.7.png",
-      "assets/png.8.png",
-      "assets/png.9.png",
-      "assets/png.10.png",
-      "assets/png.11.png",
-      "assets/png.12.png",
-      "assets/png.13.png",
-      "assets/png.14.png",
-      "assets/png.15.png",
-      "assets/png.16.png",
-      "assets/png.17.png",
-      "assets/png.18.png",
-      "assets/png.19.png"
+      "assets/png.01.webp",
+      "assets/boudy-2.webp",
+      "assets/monmon-birthday.webp",
+      "assets/png.4.webp",
+      "assets/png.5.webp",
+      "assets/png.6.webp",
+      "assets/png.7.webp",
+      "assets/png.8.webp",
+      "assets/png.9.webp",
+      "assets/png.10.webp",
+      "assets/png.11.webp",
+      "assets/png.12.webp",
+      "assets/png.13.webp",
+      "assets/png.14.webp",
+      "assets/png.15.webp",
+      "assets/png.16.webp",
+      "assets/png.17.webp",
+      "assets/png.18.webp",
+      "assets/png.19.webp"
     ]
   };
 
@@ -83,6 +83,8 @@
       img.alt = alt;
       img.className = className;
       img.decoding = "async";
+      img.loading = "lazy";
+      img.fetchPriority = "low";
 
       img.addEventListener("error", () => {
         const note = document.createElement("p");
@@ -764,14 +766,14 @@
       width = window.innerWidth;
       height = window.innerHeight;
 
-      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      const ratio = Math.min(window.devicePixelRatio || 1, width < 600 ? 1.35 : 1.75);
 
       canvas.width = Math.round(width * ratio);
       canvas.height = Math.round(height * ratio);
       ctx.setTransform(ratio, 0, 0, ratio, 0, 0);
 
       stars = Array.from(
-        { length: width < 600 ? 35 : 65 },
+        { length: width < 600 ? 24 : 52 },
         () => ({
           x: Math.random() * width,
           y: Math.random() * height,
@@ -784,7 +786,7 @@
 
     function burst(x, y) {
       const color = colors[Math.floor(Math.random() * colors.length)];
-      const count = width < 600 ? 44 : 70;
+      const count = width < 600 ? 30 : 58;
 
       for (let i = 0; i < count; i++) {
         const angle =
@@ -805,8 +807,9 @@
         });
       }
 
-      if (particles.length > 500) {
-        particles.splice(0, particles.length - 500);
+      const particleLimit = width < 600 ? 260 : 420;
+      if (particles.length > particleLimit) {
+        particles.splice(0, particles.length - particleLimit);
       }
     }
 
